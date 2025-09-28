@@ -1,79 +1,92 @@
 import { defineConfig, devices } from '@playwright/test';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
-
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
 export default defineConfig({
   testDir: './tests',
-  /* Run tests in files in parallel */
+  testIgnore: ['**/api/**'],
   fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://localhost:3000',
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+  forbidOnly: true,       // true = test.only() is not allowed in CI. Remove .only() calls.
+  retries: process.env.CI ? 1 : 0,
+  workers: 10,
+  timeout: 180000,        // Maximum time one test can run for
+  expect: {
+    timeout: 15000,       // Increasing the default expect timeout from 5 to 15 seconds
   },
-
-  /* Configure projects for major browsers */
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+  reporter: [
+    ['html'],
+    ['list'],
+    ['json', { outputFile: 'test-results/test-results.json' }],
+    ['junit', { outputFile: 'test-results/test-results.xml' }],
+    ['allure-playwright']
   ],
 
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  use: {
+    baseURL: '',
+    video: 'retain-on-failure',         // 'off' to disable, 'on' to always record, 'retain-on-failure' to keep videos only on failure
+    screenshot: 'only-on-failure',      // 'off' to disable, 'on' to always capture, 'only-on-failure' to capture only when a test fails
+    trace: 'off',                       // 'off' to disable, 'on' to always record, 'retain-on-failure' to keep traces only on failure
+    actionTimeout: 20000,               // Default timeout for all actions (click, fill, etc.)
+    navigationTimeout: 20000,           // Default timeout for navigation actions (goto, reload, etc.)
+    launchOptions: {
+      slowMo: process.env.SLOW ? 1000 : 0, // Only slow down when debugging --> sample usage: SLOW=1 npx playwright test
+      headless: !process.env.SLOW,         // Run in headless mode unless SLOW is set
+      // headless: true,4
+      args: [
+        "--start-maximized",
+        "--ignore-certificate-errors",
+        "--no-sandbox",
+        "--disable-dev-shm-usage"
+      ],
+    },
+  },
+
+  projects: [
+    {
+      name: 'local',    // when you don't specify a browser explicitly, Chromium is the default browser that gets used.
+      use: {
+        viewport: null,
+        launchOptions: {
+          headless: false,
+          args: [
+            "--start-maximized"
+          ],
+        }
+      },
+    },
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1920, height: 1080 }
+      },
+    },
+    {
+      name: "firefox",
+      use: {
+        ...devices["Desktop Firefox"],
+        launchOptions: {
+          args: ["-width=1920", "-height=1080"],
+        },
+        viewport: { width: 1920, height: 1080 },
+      },
+    },
+    {
+      name: "webkit", // Safari
+      use: {
+        ...devices["Desktop Safari"],
+        viewport: { width: 1920, height: 1080 },
+      },
+    },
+
+    // A no-browser project for API or unit testing
+    {
+      name: 'api',
+      testDir: './tests/api',
+      testIgnore: "",
+      workers: 1,
+      use: {
+        baseURL: 'https://restful-booker.herokuapp.com',
+      },
+    }
+  ]
+
 });
