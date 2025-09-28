@@ -16,11 +16,17 @@
     "test:debug": "npx playwright test --project=local --debug",
     "test:slow": "SLOW=true npx playwright test --project=local",
     "test:codegen": "npx playwright codegen saucedemo.com --output=tests/codegen.spec.ts",
-    "clean": "rimraf test-results playwright-report allure-report allure-results"
+    "clean": "rimraf test-results playwright-report allure-report allure-results",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.1",
     "@types/node": "^24.5.2",
+    "@typescript-eslint/eslint-plugin": "^8.44.0",
+    "@typescript-eslint/parser": "^8.44.0",
+    "eslint": "^9.35.0",
+    "eslint-plugin-playwright": "^2.2.2",
     "allure-playwright": "^3.4.1",
     "rimraf": "^6.0.1"
   }
