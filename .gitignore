@@ -1,8 +1,10 @@
-
-# Playwright
 node_modules/
 /test-results/
 /playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/
+/allure-report/
+/allure-results/
+.idea
+.vscode
+.DS_Store
+.github/.DS_Store
+tests/codegen.spec.ts
