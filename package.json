@@ -1,15 +1,22 @@
 {
   "name": "playwright-test-automation-ts",
   "version": "1.0.0",
-  "description": "",
+  "description": "A scalable test automation framework using Playwright",
   "main": "index.js",
-  "scripts": {},
   "keywords": [],
   "author": "Kubilay Dogan",
   "license": "ISC",
   "type": "commonjs",
+  "scripts": {
+    "test": "npm run clean && npx playwright test --project=local",
+    "test:file": "npx playwright test --project=local sample-api",
+    "test:tag": "playwright test --project=local --grep @failing",
+    "test:testcase": "playwright test --project=local -g 'should login with valid credentials'",
+    "test:api": "npx playwright test --project=api"
+  },
   "devDependencies": {
     "@playwright/test": "^1.55.1",
-    "@types/node": "^24.5.2"
+    "@types/node": "^24.5.2",
+    "allure-playwright": "^3.4.1"
   }
 }
