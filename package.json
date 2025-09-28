@@ -9,14 +9,19 @@
   "type": "commonjs",
   "scripts": {
     "test": "npm run clean && npx playwright test --project=local",
-    "test:file": "npx playwright test --project=local sample-api",
-    "test:tag": "playwright test --project=local --grep @failing",
+    "test:file": "npx playwright test --project=local example",
+    "test:tag": "playwright test --project=local --grep @negative",
     "test:testcase": "playwright test --project=local -g 'should login with valid credentials'",
-    "test:api": "npx playwright test --project=api"
+    "test:api": "npx playwright test --project=api",
+    "test:debug": "npx playwright test --project=local --debug",
+    "test:slow": "SLOW=true npx playwright test --project=local",
+    "test:codegen": "npx playwright codegen saucedemo.com --output=tests/codegen.spec.ts",
+    "clean": "rimraf test-results playwright-report allure-report allure-results"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.1",
     "@types/node": "^24.5.2",
-    "allure-playwright": "^3.4.1"
+    "allure-playwright": "^3.4.1",
+    "rimraf": "^6.0.1"
   }
 }
