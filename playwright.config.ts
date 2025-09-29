@@ -4,12 +4,12 @@ export default defineConfig({
   testDir: './tests',
   testIgnore: ['**/api/**'],
   fullyParallel: true,
-  forbidOnly: true,       // true = test.only() is not allowed in CI. Remove .only() calls.
+  forbidOnly: true,
   retries: process.env.CI ? 1 : 0,
   workers: 10,
-  timeout: 180000,        // Maximum time one test can run for
+  timeout: 180000,
   expect: {
-    timeout: 15000,       // Increasing the default expect timeout from 5 to 15 seconds
+    timeout: 15000,
   },
   reporter: [
     ['html'],
@@ -21,15 +21,15 @@ export default defineConfig({
 
   use: {
     baseURL: '',
-    video: 'retain-on-failure',         // 'off' to disable, 'on' to always record, 'retain-on-failure' to keep videos only on failure
-    screenshot: 'only-on-failure',      // 'off' to disable, 'on' to always capture, 'only-on-failure' to capture only when a test fails
-    trace: 'off',                       // 'off' to disable, 'on' to always record, 'retain-on-failure' to keep traces only on failure
-    actionTimeout: 20000,               // Default timeout for all actions (click, fill, etc.)
-    navigationTimeout: 20000,           // Default timeout for navigation actions (goto, reload, etc.)
+    video: 'retain-on-failure',
+    screenshot: 'only-on-failure',
+    trace: 'off',
+    actionTimeout: 20000,
+    navigationTimeout: 20000,
     launchOptions: {
-      slowMo: process.env.SLOW ? 1000 : 0, // Only slow down when debugging --> sample usage: SLOW=1 npx playwright test
+      slowMo: process.env.SLOW ? 1000 : 0,
       headless: !process.env.SLOW,         // Run in headless mode unless SLOW is set
-      // headless: true,4
+      // headless: true,
       args: [
         "--start-maximized",
         "--ignore-certificate-errors",
@@ -41,7 +41,7 @@ export default defineConfig({
 
   projects: [
     {
-      name: 'local',    // when you don't specify a browser explicitly, Chromium is the default browser that gets used.
+      name: 'local',
       use: {
         viewport: null,
         launchOptions: {
@@ -63,14 +63,11 @@ export default defineConfig({
       name: "firefox",
       use: {
         ...devices["Desktop Firefox"],
-        launchOptions: {
-          args: ["-width=1920", "-height=1080"],
-        },
         viewport: { width: 1920, height: 1080 },
       },
     },
     {
-      name: "webkit", // Safari
+      name: "webkit",
       use: {
         ...devices["Desktop Safari"],
         viewport: { width: 1920, height: 1080 },
