@@ -54,7 +54,7 @@ jobs:
       - name: Validate inputs
         run: |
             if [[ "${{ inputs.run-all-tests }}" == "false" && -z "${{ inputs.test-file }}" && ("${{ inputs.tag }}" == " " || -z "${{ inputs.tag }}") ]]; then
-            echo "Error: Must select run-all-tests or provide test-file or tag"
+            echo ">>> ERROR: Must select run-all-tests or provide test-file or tag"
             exit 1
             fi
     
