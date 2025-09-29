@@ -1,4 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
+const env = process.env.ENV || 'qa1'; 
+
+const baseURLs: Record<string, string> = {
+  qa1: 'https://www.saucedemo.com',
+  qa2: 'https://www.saucedemo.com',
+};
 
 export default defineConfig({
   testDir: './tests',
@@ -20,7 +26,7 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: '',
+    baseURL: baseURLs[env],
     video: 'retain-on-failure',
     screenshot: 'only-on-failure',
     trace: 'off',
