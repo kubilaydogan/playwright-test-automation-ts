@@ -19,10 +19,10 @@
                 "./pages"
             ],
             "@utils": [
-                "./utils"
+                "./utils/"
             ],
-            "@test-data-manager": [
-                "./test-data/test-data-manager"
+            "@test-data": [
+                "./utils/test-data-manager/env-loader.util"
             ],
         }
     }
