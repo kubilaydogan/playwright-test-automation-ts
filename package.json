@@ -13,6 +13,7 @@
     "test:tag": "playwright test --project=local --grep @negative",
     "test:testcase": "playwright test --project=local -g 'should login with valid credentials'",
     "test:api": "npx playwright test --project=api",
+    "test:nb": "npx playwright test --project=no-browser",
     "test:debug": "npx playwright test --project=local --debug",
     "test:slow": "SLOW=true npx playwright test --project=local",
     "test:codegen": "npx playwright codegen saucedemo.com --output=tests/codegen.spec.ts",

@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-  testIgnore: ['**/api/**'],
+  testIgnore: ['**/api/**', '**/data-driven-testing/**'],
   fullyParallel: true,
   forbidOnly: true,
   retries: process.env.CI ? 1 : 0,
@@ -73,8 +73,6 @@ export default defineConfig({
         viewport: { width: 1920, height: 1080 },
       },
     },
-
-    // A no-browser project for API or unit testing
     {
       name: 'api',
       testDir: './tests/api',
@@ -83,6 +81,11 @@ export default defineConfig({
       use: {
         baseURL: 'https://restful-booker.herokuapp.com',
       },
+    },
+    {
+      name: 'no-browser',
+      testDir: './tests/data-driven-testing',
+      testIgnore: "",
     }
   ]
 
