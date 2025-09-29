@@ -30,6 +30,7 @@ on:
           type: choice
           required: false
           options:
+            - " "
             - "login"
             - "shopping"
         run-all-tests:
@@ -52,7 +53,7 @@ jobs:
 
       - name: Validate inputs
         run: |
-            if [[ "${{ inputs.run-all-tests }}" == "false" && -z "${{ inputs.test-file }}" && -z "${{ inputs.tag }}" ]]; then
+            if [[ "${{ inputs.run-all-tests }}" == "false" && -z "${{ inputs.test-file }}" && ("${{ inputs.tag }}" == " " || -z "${{ inputs.tag }}") ]]; then
             echo "Error: Must select run-all-tests or provide test-file or tag"
             exit 1
             fi
@@ -82,7 +83,7 @@ jobs:
           ENV: ${{ inputs.env }}
 
       - name: Run Playwright tests by tag
-        if: ${{ !inputs.run-all-tests && !inputs.test-file && inputs.tag }}
+        if: ${{ !inputs.run-all-tests && !inputs.test-file && inputs.tag && inputs.tag != '-- Select a tag --' }}
         run: npx playwright test --project=${{ inputs.browser }} --grep "@${{ inputs.tag }}"
         env:
           ENV: ${{ inputs.env }}
