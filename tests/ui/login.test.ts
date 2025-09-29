@@ -3,7 +3,7 @@ import { LoginPage, ProductPage } from '@pages';
 import data from '@test-data';
 
 
-test.describe('SauceLabs Login Tests', () => {
+test.describe('SauceLabs @login tests', () => {
 
     test('should login with valid credentials @positive', async ({ page }) => {
         await new LoginPage(page).login(data.username, data.password);
