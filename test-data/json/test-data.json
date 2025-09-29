@@ -1,0 +1,32 @@
+[
+    {
+        "testCase": "Valid Employee 1",
+        "employee": {
+            "firstName": "John",
+            "lastName": "Doe",
+            "ssn": "111-22-3333"
+        },
+        "city": "Weston",
+        "state": "FL"
+    },
+    {
+        "testCase": "Valid Employee 2",
+        "employee": {
+            "firstName": "Jane",
+            "lastName": "Smith",
+            "ssn": "555-66-7777"
+        },
+        "city": "Boca Raton",
+        "state": "FL"
+    },
+    {
+        "testCase": "Valid Employee 3",
+        "employee": {
+            "firstName": "Bob",
+            "lastName": "Johnson",
+            "ssn": "999-88-7766"
+        },
+        "city": "Houston",
+        "state": "TX"
+    }
+]

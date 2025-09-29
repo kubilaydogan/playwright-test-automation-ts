@@ -1,0 +1,38 @@
+[
+  {
+    "testCase": "Valid Employee 1",
+    "ssn": "111-22-3334",
+    "firstName": "John",
+    "lastName": "Doe",
+    "address": "123 Main St",
+    "city": "Austin",
+    "state": "TX",
+    "zipCode": "78701",
+    "dateOfBirth": "04/16/1990",
+    "gender": "M"
+  },
+  {
+    "testCase": "Valid Employee 2", 
+    "ssn": "555-66-7778",
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "address": "456 Oak Ave",
+    "city": "Dallas",
+    "state": "TX",
+    "zipCode": "75201",
+    "dateOfBirth": "04/16/1990",
+    "gender": "F"
+  },
+  {
+    "testCase": "Valid Employee 3",
+    "ssn": "999-88-7766",
+    "firstName": "Bob",
+    "lastName": "Johnson",
+    "address": "789 Pine Rd",
+    "city": "Houston",
+    "state": "TX", 
+    "zipCode": "77001",
+    "dateOfBirth": "04/16/1990",
+    "gender": "M"
+  }
+]

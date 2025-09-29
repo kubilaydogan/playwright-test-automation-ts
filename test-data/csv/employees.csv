@@ -1,0 +1,5 @@
+testCase,firstName,lastName,ssn,address,city,state,zipCode,dateOfBirth,gender
+"Valid Employee 1",John,Doe,111-22-3333,123 Main St,Austin,TX,78701,01/15/1985,M
+"Valid Employee 2",Jane,Smith,555-66-7777,456 Oak Ave,Dallas,TX,75201,03/22/1990,F
+"Valid Employee 3",Bob,Johnson,999-88-7766,789 Pine Rd,Houston,TX,77001,07/10/1988,M
+"Special Characters",Maria,O'Connor,987-65-4321,"555 St. Mary's Blvd",Fort Worth,TX,76107,06/14/1987,F
