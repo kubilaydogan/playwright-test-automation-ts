@@ -1,7 +1,7 @@
 {
   "name": "playwright-test-automation-ts",
   "version": "1.0.0",
-  "description": "A scalable test automation framework using Playwright",
+  "description": "A scalable end-to-end and API test automation framework using Playwright, supporting data-driven testing, environment configuration, and advanced reporting.",
   "main": "index.js",
   "keywords": [],
   "author": "Kubilay Dogan",
@@ -16,18 +16,24 @@
     "test:debug": "npx playwright test --project=local --debug",
     "test:slow": "SLOW=true npx playwright test --project=local",
     "test:codegen": "npx playwright codegen saucedemo.com --output=tests/codegen.spec.ts",
+    "report": "npx playwright show-report",
+    "report:allure": "npx allure generate --clean && npx allure open",
     "clean": "rimraf test-results playwright-report allure-report allure-results",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "type-check": "tsc --noEmit",
+    "check": "tsc --noEmit && eslint ."
   },
   "devDependencies": {
     "@playwright/test": "^1.55.1",
     "@types/node": "^24.5.2",
+    "typescript": "^5.9.2",
     "@typescript-eslint/eslint-plugin": "^8.44.0",
     "@typescript-eslint/parser": "^8.44.0",
     "eslint": "^9.35.0",
     "eslint-plugin-playwright": "^2.2.2",
-    "allure-playwright": "^3.4.1",
+    "allure-playwright": "^3.4.1",  
+    "csv-parse": "5.5.6",
     "rimraf": "^6.0.1"
   }
 }
