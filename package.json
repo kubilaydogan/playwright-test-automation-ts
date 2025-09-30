@@ -23,7 +23,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "type-check": "tsc --noEmit",
-    "check": "tsc --noEmit && eslint ."
+    "check": "tsc --noEmit && eslint .",
+    "bump-version": "npx npm-check-updates -u && npm install"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.1",
