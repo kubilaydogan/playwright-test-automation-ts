@@ -27,14 +27,14 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.55.1",
-    "@types/node": "^24.5.2",
-    "typescript": "^5.9.2",
-    "@typescript-eslint/eslint-plugin": "^8.44.0",
-    "@typescript-eslint/parser": "^8.44.0",
-    "eslint": "^9.35.0",
-    "eslint-plugin-playwright": "^2.2.2",
-    "allure-playwright": "^3.4.1",  
+    "@types/node": "^24.6.0",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "allure-playwright": "^3.4.1",
     "csv-parse": "5.5.6",
-    "rimraf": "^6.0.1"
+    "eslint": "^9.36.0",
+    "eslint-plugin-playwright": "^2.2.2",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.2"
   }
 }
