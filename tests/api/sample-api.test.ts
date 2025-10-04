@@ -1,21 +1,15 @@
 import { test, expect } from '@playwright/test';
+import { BookingData, BookingResponse } from '@types';
+import { AuthHelper } from '@utils';
 
 test.describe('Native @API Tests using Playwright for RESTful Booker', () => {
     let createdBookingId: number;
     let authToken: string;
+    let authHelper: AuthHelper;
 
-    test('POST /auth - Get authentication token', async ({ request }) => {
-        const response = await request.post('/auth', {
-            data: {
-                username: 'admin',
-                password: 'password123'
-            }
-        });
-        const responseBody = await response.json();
-        authToken = responseBody.token;
-        
-        expect(response.status()).toBe(200);
-        expect(responseBody).toHaveProperty('token');
+    test.beforeAll(async ({ request }) => {
+        authHelper = new AuthHelper(request);
+        authToken = await authHelper.getAuthToken();
     });
 
     test('GET /booking', async ({ request }) => {
@@ -28,22 +22,23 @@ test.describe('Native @API Tests using Playwright for RESTful Booker', () => {
     });
 
     test('POST /booking', async ({ request }) => {
+        const bookingData: BookingData = {
+            firstname: 'John',
+            lastname: 'Doe',
+            totalprice: 300,
+            depositpaid: true,
+            bookingdates: {
+                checkin: '2025-10-01',
+                checkout: '2025-10-05'
+            },
+            additionalneeds: 'Breakfast'
+        };
+
         const response = await request.post('/booking', {
-            data: {
-                firstname: 'John',
-                lastname: 'Doe',
-                totalprice: 123,
-                depositpaid: true,
-                bookingdates: {
-                    checkin: '2023-01-01',
-                    checkout: '2023-01-02'
-                },
-                additionalneeds: 'Breakfast'
-            }
+            data: bookingData
         });
-        const responseBody = await response.json();      
+        const responseBody: BookingResponse = await response.json();      
         createdBookingId = responseBody.bookingid;
-        console.log('Created booking ID:', createdBookingId);
         
         expect(response.status()).toBe(200);
         expect(responseBody).toHaveProperty('bookingid');
@@ -55,6 +50,7 @@ test.describe('Native @API Tests using Playwright for RESTful Booker', () => {
         expect(createdBookingId).toBeDefined();
         expect(authToken).toBeDefined();
         console.log('Using booking ID:', createdBookingId);
+        console.log('Using auth token:', authToken ? 'Token available' : 'No token');
         
         const response = await request.put(`/booking/${createdBookingId}`, {
             headers: {
@@ -68,8 +64,8 @@ test.describe('Native @API Tests using Playwright for RESTful Booker', () => {
                 totalprice: 456,
                 depositpaid: false,
                 bookingdates: {
-                    checkin: '2023-02-01',
-                    checkout: '2023-02-02'
+                    checkin: '2025-10-01',
+                    checkout: '2025-10-05'
                 },
                 additionalneeds: 'Dinner'
             }
@@ -79,5 +75,4 @@ test.describe('Native @API Tests using Playwright for RESTful Booker', () => {
         expect(responseBody).toHaveProperty('firstname', 'Jane');
         expect(response.status()).toBe(200);
     });
-
 });

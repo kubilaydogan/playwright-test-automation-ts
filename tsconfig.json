@@ -24,6 +24,9 @@
             "@test-data": [
                 "./utils/test-data-manager/env-loader.util"
             ],
+             "@types": [
+                "./types"
+            ]
         }
     }
 }
