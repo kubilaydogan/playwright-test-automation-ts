@@ -49,9 +49,6 @@ permissions:
 
 run-name: Run Playwright Tests with GSM in ${{ inputs.env }} on ${{ inputs.browser }}
 
-env:
-  SAUCE_PASSWORD: ${{ steps.secrets.outputs.sauce_password }}
-
 jobs:
   run-tests:
     timeout-minutes: 30
@@ -98,18 +95,21 @@ jobs:
         run: npx playwright test --project=${{ inputs.browser }}
         env:
           ENV: ${{ inputs.env }}
+          SAUCE_PASSWORD: ${{ steps.secrets.outputs.sauce_password }}
 
       - name: Run Playwright tests by file
         if: ${{ !inputs.run-all-tests && inputs.test-file }}
         run: npx playwright test --project=${{ inputs.browser }} ${{ inputs.test-file }}
         env:
           ENV: ${{ inputs.env }}
+          SAUCE_PASSWORD: ${{ steps.secrets.outputs.sauce_password }}
 
       - name: Run Playwright tests by tag
         if: ${{ !inputs.run-all-tests && !inputs.test-file && inputs.tag && inputs.tag != '-- Select a tag --' }}
         run: npx playwright test --project=${{ inputs.browser }} --grep "@${{ inputs.tag }}"
         env:
           ENV: ${{ inputs.env }}
+          SAUCE_PASSWORD: ${{ steps.secrets.outputs.sauce_password }}
 
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4
