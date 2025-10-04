@@ -47,6 +47,11 @@ permissions:
   contents: read
   id-token: write
 
+run-name: Run Playwright Tests with GSM in ${{ inputs.env }} on ${{ inputs.browser }}
+
+env:
+  SAUCE_PASSWORD: ${{ steps.secrets.outputs.sauce_password }}
+
 jobs:
   run-tests:
     timeout-minutes: 30
@@ -73,7 +78,7 @@ jobs:
         uses: google-github-actions/get-secretmanager-secrets@v2
         with:
           secrets: |-
-            SAUCE_PASSWORD: saucedemo/sauce_password
+            sauce_password: saucedemo/sauce_password
            
       
       - name: Setup Node.js
