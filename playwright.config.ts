@@ -2,6 +2,8 @@ import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 dotenv.config();
 
+// This configurations allows to run tests in different environments based on the ENV variable.
+// Usage: ENV=qa1 npx playwright test or set the ENV variable through GitHub Actions.
 const env = process.env.ENV || 'qa1'; 
 
 const baseURLs: Record<string, string> = {
