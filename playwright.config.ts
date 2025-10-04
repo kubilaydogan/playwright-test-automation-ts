@@ -1,4 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+dotenv.config();
+
 const env = process.env.ENV || 'qa1'; 
 
 const baseURLs: Record<string, string> = {
