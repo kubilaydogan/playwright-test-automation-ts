@@ -65,7 +65,7 @@ jobs:
       - name: GCP Auth
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: projects/692750311333/locations/global/workloadIdentityPools/runners/providers/github
+          workload_identity_provider: projects/692750311333/locations/global/workloadIdentityPools/github-actions-pool/providers/github
           service_account: kubilaydogan@saucedemo.iam.gserviceaccount.com
 
       - name: Get secrets from GSM
