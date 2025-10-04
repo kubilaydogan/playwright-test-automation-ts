@@ -4,6 +4,10 @@ on:
   #   branches: [ main ]
   pull_request:
     branches: [ main ]
+
+env:
+  SAUCE_PASSWORD: ${{ secrets.SAUCE_PASSWORD }}
+  
 jobs:
   test:
     timeout-minutes: 60

@@ -43,6 +43,9 @@ concurrency:
   group: "run-tests-${{ github.ref }}"
   cancel-in-progress: true
 
+env:
+  SAUCE_PASSWORD: ${{ secrets.SAUCE_PASSWORD }}
+
 jobs:
   run-tests:
     timeout-minutes: 30
