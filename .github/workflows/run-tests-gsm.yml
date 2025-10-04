@@ -1,3 +1,7 @@
+# This workflow runs Playwright tests for the Sauce Demo application
+# It retrieves secrets from Google Secret Manager (GSM) using Workload Identity Federation (WIF)
+# and allows users to select the browser, environment, specific test files, or tags to run.
+
 name: run-tests-gsm
 
 on:
@@ -47,7 +51,7 @@ permissions:
   contents: read
   id-token: write
 
-run-name: Run Playwright Tests with GSM in ${{ inputs.env }} on ${{ inputs.browser }}
+run-name: Running Tests in ${{ inputs.env }} (env) on ${{ inputs.browser }}
 
 jobs:
   run-tests:
