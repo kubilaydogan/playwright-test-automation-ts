@@ -1,4 +1,4 @@
-name: run-tests
+name: run-tests-gsm
 
 on:
     workflow_dispatch:
